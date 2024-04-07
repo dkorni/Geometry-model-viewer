@@ -15,17 +15,17 @@ namespace GMV.Core
 
         public static float GetSpheereX(float radius, float u, float v)
         {
-            return radius * Mathf.Sin(u) * Mathf.Cos(v);
+            return radius * Mathf.Cos(u) * Mathf.Cos(v);
         }
 
         public static float GetSpheereY(float radius, float u, float v)
         {
-            return radius * Mathf.Sin(u) * Mathf.Sin(v);
+            return radius * Mathf.Cos(u) * Mathf.Sin(v);
         }
 
         public static float GetSpheereZ(float radius, float u)
         {
-            return radius * Mathf.Cos(u);
+            return radius * Mathf.Sin(u);
         }
 
         public static float GetTorusX(float majorRadius, float minorRadius, float u, float v)

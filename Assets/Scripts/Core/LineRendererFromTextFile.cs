@@ -1,4 +1,3 @@
-using GMV.Core;
 using GMV.Core.DrawSrtrategies;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +22,8 @@ namespace GMV.Core
         private Vector2[] _uvOriginalPoints;
         private Vector2[] _uvPoints;
 
+        private Vector2 _uvCenter;
+
         private DrawSrtrategy _currentDrawStrategy;
 
         public void Start()
@@ -30,9 +31,9 @@ namespace GMV.Core
             // Build();
         }
 
-        public void TransferOnFigure<T>(T figure) where T : DrawSrtrategy
+        public void TransferOnFigure<T>(T figure, Vector3 figureTranslation, Vector3 figureRotation) where T : DrawSrtrategy
         {
-            _pointsOnFigure = new Vector3[_pointCount+1];
+            _pointsOnFigure = new Vector3[_pointCount + 1];
 
             switch (figure)
             {
@@ -41,7 +42,14 @@ namespace GMV.Core
                     var sphere = figure as Sphere;
 
                     for (int i = 0; i <= _pointCount; i++)
-                        _pointsOnFigure[i] = GeometryMath.GetSpherePoint(sphere.Radius, _uvPoints[i].x, _uvPoints[i].y);
+                    {
+                        var point = sphere.GetPoint(sphere.Radius, _uvPoints[i].x, _uvPoints[i].y);
+                       
+                        // переносимо точку малюнка з урахуванням повороту і зсуву фігури
+                        var transformMatrix = Matrix4x4.Translate(figureTranslation) * Matrix4x4.Rotate(Quaternion.Euler(figureRotation.x, figureRotation.y, figureRotation.z));
+                        point = transformMatrix.MultiplyPoint3x4(point);
+                        _pointsOnFigure[i] = point;
+                    }
 
                     break;
             }
@@ -50,7 +58,7 @@ namespace GMV.Core
             _currentDrawStrategy = figure;
         }
 
-        public void TransformOnFigure(Vector2 translation, Vector3 angles)
+        public void TransformOnFigure(Vector2 translation, float rotationAngle, Vector3 figureTranslation, Vector3 figureRotation)
         {
             for (int i = 0; i < _uvPoints.Length; i++)
             {
@@ -58,20 +66,26 @@ namespace GMV.Core
 
                 // https://docs.unity3d.com/ScriptReference/Matrix4x4.Translate.html
                 // https://docs.unity3d.com/ScriptReference/Matrix4x4.Rotate.html
-                Matrix4x4 m = Matrix4x4.Translate(translation);
+
+                Matrix4x4 translateToOrigin = Matrix4x4.Translate(_uvCenter);
+                Matrix4x4 rotation = Matrix4x4.Rotate(Quaternion.Euler(new Vector3(0, 0, rotationAngle)));
+                Matrix4x4 translateBack = Matrix4x4.Translate(-_uvCenter);
+
+                Matrix4x4 m = translateToOrigin*Matrix4x4.Translate(translation) * rotation * translateBack;
 
                 Vector3 rotatedVector = m.MultiplyPoint(initialVertice);
 
                 _uvPoints[i] = rotatedVector;
             }
 
-            TransferOnFigure(_currentDrawStrategy);
+            TransferOnFigure(_currentDrawStrategy, figureTranslation, figureRotation);
         }
 
         public void Build()
         {
             LoadDrawingPointsFromFile();
             NormilizeIntoUV();
+            CalculateUVCenter();
         }
 
         private void LoadDrawingPointsFromFile()
@@ -118,6 +132,17 @@ namespace GMV.Core
 
             _uvPoints = uvPoints.ToArray();
             _uvOriginalPoints = uvPoints.ToArray();
+        }
+
+        private void CalculateUVCenter()
+        {
+            _uvCenter = Vector2.zero;
+            foreach (Vector2 uvPoint in _uvOriginalPoints)
+            {
+                _uvCenter += uvPoint;
+            }
+
+            _uvCenter /= _uvOriginalPoints.Length;
         }
     }
 }

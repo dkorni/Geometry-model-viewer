@@ -25,8 +25,8 @@ public class MainUiPanel : MonoBehaviour
     private Slider rotationYSlider;
     private Slider rotationZSlider;
 
-    private Slider drawingPositionXSlider;
-    private Slider drawingPositionYSlider;
+    private Slider drawingPositionVSlider;
+    private Slider drawingPositionUSlider;
 
     private Slider drawingRotationSlider;
 
@@ -58,14 +58,14 @@ public class MainUiPanel : MonoBehaviour
         rotationZSlider = document.rootVisualElement.Q<Slider>("RotationZ");
         rotationZSlider.RegisterValueChangedCallback(_ => MakeEuclideanTransformations());
 
-        drawingPositionXSlider = document.rootVisualElement.Q<Slider>("DrawingPositionX");
-        drawingPositionXSlider.RegisterValueChangedCallback(_ => TransformDrawing());
+        drawingPositionVSlider = document.rootVisualElement.Q<Slider>("DrawingPositionV");
+        drawingPositionVSlider.RegisterValueChangedCallback(_ => TransformDrawing());
 
-        drawingPositionYSlider = document.rootVisualElement.Q<Slider>("DrawingPositionY");
-        drawingPositionYSlider.RegisterValueChangedCallback(_ => TransformDrawing());
+        drawingPositionUSlider = document.rootVisualElement.Q<Slider>("DrawingPositionU");
+        drawingPositionUSlider.RegisterValueChangedCallback(_ => TransformDrawing());
 
-        //drawingRotationSlider = document.rootVisualElement.Q<Slider>("DrawingRotation");
-        //drawingRotationSlider.RegisterValueChangedCallback(_ => TransformDrawing());
+        drawingRotationSlider = document.rootVisualElement.Q<Slider>("DrawingRotation");
+        drawingRotationSlider.RegisterValueChangedCallback(_ => TransformDrawing());
     }
 
     private void OnFigureDropdownValueChanged(ChangeEvent<string> @event)
@@ -103,15 +103,19 @@ public class MainUiPanel : MonoBehaviour
 
     private void TransformDrawing()
     {
-        var x = drawingPositionXSlider.value;
-        drawingPositionXSlider.label = "Позиція U: " + x;
+        var u = drawingPositionUSlider.value;
+        var v = drawingPositionVSlider.value;
 
-        var y = drawingPositionYSlider.value;
-        drawingPositionYSlider.label = "Позиція V: " + y;
+        drawingPositionVSlider.label = "Позиція X: " + v;
 
-        var translation = new Vector2(x, y);
+        drawingPositionUSlider.label = "Позиція Y: " + u;
 
-        geometryBuilder.TransformDrawing(translation, Vector3.zero);
+        var rotationAngle = drawingRotationSlider.value;
+        drawingRotationSlider.label = "Поворот: " + rotationAngle;
+
+        var translation = new Vector2(u, -v);
+
+        geometryBuilder.TransformDrawing(translation, rotationAngle);
     }
 
     private void ResetValues()

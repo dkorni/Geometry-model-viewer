@@ -11,6 +11,9 @@ namespace GMV.Core
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private LineRendererFromTextFile lineRendererFromText;
 
+        private Vector3 _figureTranslation;
+        private Vector3 _figureRotation;
+
         void Start()
         {
             Build();
@@ -24,11 +27,14 @@ namespace GMV.Core
         public void TransformFigure(Vector3 offset, Vector3 angles)
         {
             figure.MakeEuclideanTransformations(offset, angles);
+            lineRendererFromText.TransferOnFigure(DrawSrtrategy, offset, angles);
+            _figureTranslation = offset;
+            _figureRotation = angles;
         }
 
-        public void TransformDrawing(Vector3 offset, Vector3 angles)
+        public void TransformDrawing(Vector3 offset, float rotationAngle)
         {
-            lineRendererFromText.TransformOnFigure(offset, angles);
+            lineRendererFromText.TransformOnFigure(offset, rotationAngle, _figureTranslation, _figureRotation);
         }
 
         public void Build(DrawSrtrategy drawSrtrategy)
@@ -36,7 +42,8 @@ namespace GMV.Core
             figure = Figure.Build(drawSrtrategy);
             _meshFilter.mesh = figure.Mesh;
             lineRendererFromText.Build();
-            lineRendererFromText.TransferOnFigure(drawSrtrategy);
+            lineRendererFromText.TransferOnFigure(drawSrtrategy, _figureTranslation, _figureRotation);
+            DrawSrtrategy = drawSrtrategy;
         }
     }
 }

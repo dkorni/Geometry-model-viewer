@@ -6,69 +6,16 @@ namespace GMV.Core.DrawSrtrategies
     /// Груша
     /// </summary>
     [CreateAssetMenu(fileName = "Pear", menuName = "DrawSrtrategies/Pear")]
-    public class Pear : DrawSrtrategy
+    public class Pear : Sphere
     {
-        public float Radius = 1;
-        public int Segments = 25;
-        public float Height = 0.3f;
+        public override Vector3 GetPoint(float radius, float u, float v)
+        {
+            var point = base.GetPoint(radius, u, v);
 
-        public override Mesh Draw()
-        {          
-            vertices = new Vector3[(Segments + 1) * (Segments + 1)];
-            triangles = new int[Segments * Segments * 6];
-            uvCordinates = new Vector2[(Segments + 1) * (Segments + 1)];
+            if (point.z > Radius / 2)
+                point.z = point.z + 2.5f * Radius * Mathf.Pow(point.z / Radius - 0.5f, 2);
 
-            int index = 0;
-
-            for (int i = 0; i <= Segments; i++)
-            {
-                float phi = 2 * Mathf.PI * i / Segments;
-
-                for (int j = 0; j <= Segments; j++)
-                {
-                    float teta = Mathf.PI * j / Segments;
-
-                    var spherePoint = GeometryMath.GetSpherePoint(Radius, teta, phi);
-                    var uv = UVCordinates.GetFromSpheerePoint(spherePoint);
-
-                    float x = spherePoint.x;
-                    
-                    float y = spherePoint.y;
-
-                    float z = spherePoint.z;
-
-                    if (z > Radius / 2)
-                        z = z + Height * Radius * Mathf.Pow(z / (Radius - 0.5f), 2);
-
-                    vertices[index] = new Vector3(x, y, z);
-                    uvCordinates[index] = uv.ToVector2();
-                    index++;
-                }
-            }
-
-            index = 0;
-
-            for (int i = 0; i < Segments; i++)
-            {
-                for (int j = 0; j < Segments; j++)
-                {
-                    int a = (Segments + 1) * i + j;
-                    int b = (Segments + 1) * i + j + 1;
-                    int c = (Segments + 1) * (i + 1) + j;
-                    int d = (Segments + 1) * (i + 1) + j + 1;
-
-                    triangles[index++] = a;
-                    triangles[index++] = b;
-                    triangles[index++] = c;
-                    triangles[index++] = c;
-                    triangles[index++] = b;
-                    triangles[index++] = d;
-                }
-            }
-
-            var mesh = BuildMesh();
-
-            return mesh;
+            return point;
         }
     }
 }

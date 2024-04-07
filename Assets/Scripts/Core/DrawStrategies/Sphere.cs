@@ -13,20 +13,19 @@ namespace GMV.Core.DrawSrtrategies
         {          
             vertices = new Vector3[(Segments + 1) * (Segments + 1)];
             triangles = new int[Segments * Segments * 6];
-            uvCordinates = new Vector2[(Segments + 1) * (Segments + 1)];
 
             int index = 0;
 
 
             for (int i = 0; i <= Segments; i++)
             {
-                float u = Mathf.PI * i / Segments;
+                float u = Mathf.PI * (-0.5f + (1f * i / Segments));
 
                 for (int j = 0; j <= Segments; j++)
                 {
                     float v = 2 * Mathf.PI * j / Segments;
 
-                    var vertex = GeometryMath.GetSpherePoint(Radius, u, v);
+                    var vertex = GetPoint(Radius, u, v);
 
                     vertices[index] = vertex;
                     index++;
@@ -39,17 +38,14 @@ namespace GMV.Core.DrawSrtrategies
             {
                 for (int j = 0; j < Segments; j++)
                 {
-                    int a = (Segments + 1) * i + j;
-                    int b = (Segments + 1) * i + j + 1;
-                    int c = (Segments + 1) * (i + 1) + j;
-                    int d = (Segments + 1) * (i + 1) + j + 1;
+                    int vertexIndex = i * (Segments + 1) + j;
+                    triangles[index++] = vertexIndex;
+                    triangles[index++] = vertexIndex + Segments + 1;
+                    triangles[index++] = vertexIndex + 1;
 
-                    triangles[index++] = a;
-                    triangles[index++] = b;
-                    triangles[index++] = c;
-                    triangles[index++] = c;
-                    triangles[index++] = b;
-                    triangles[index++] = d;
+                    triangles[index++] = vertexIndex + 1;
+                    triangles[index++] = vertexIndex + Segments + 1;
+                    triangles[index++] = vertexIndex + Segments + 2;
                 }
             }
 
@@ -57,5 +53,7 @@ namespace GMV.Core.DrawSrtrategies
 
             return mesh;
         }
+
+        public virtual Vector3 GetPoint(float radius, float u, float v) => GeometryMath.GetSpherePoint(radius, u, v);
     }
 }

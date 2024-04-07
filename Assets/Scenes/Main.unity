@@ -185,18 +185,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   figures:
-  - {fileID: 11400000, guid: a47152cda377292439d1780ab92ecfa2, type: 2}
-  - {fileID: 11400000, guid: 1650b01dd8368bb4e941d841b2379230, type: 2}
   - {fileID: 11400000, guid: 7204508a75a50cc46a3823129b6f5221, type: 2}
   - {fileID: 11400000, guid: 0ede7dbe658dc4445b1be58c5b79ac79, type: 2}
-  - {fileID: 11400000, guid: 3a77968ccdb725045a1997912befe142, type: 2}
-  - {fileID: 11400000, guid: d6b8d1473e116044cb6fdf4cc42b88a4, type: 2}
   - {fileID: 11400000, guid: 5330da81e8d7568438af64a2eb635ef1, type: 2}
-  - {fileID: 11400000, guid: ba08d30a03b710d48bf32fc226abef64, type: 2}
   - {fileID: 11400000, guid: bfaf563d68207d24793a8a8ef67cefef, type: 2}
   - {fileID: 11400000, guid: 1fdff186726ae5c42bf4a916364fb10d, type: 2}
-  - {fileID: 11400000, guid: 11c157251617d7e4c8f638d20c8c2aea, type: 2}
-  - {fileID: 11400000, guid: 497b09658c810804391ab9edbb551d89, type: 2}
   document: {fileID: 122594043}
   geometryBuilder: {fileID: 1618566744}
   objectToCenter: {fileID: 1618566745}
@@ -448,13 +441,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalRotation: {x: 0.5606699, y: -0.43087038, z: -0.43087038, w: 0.5606699}
+  m_LocalPosition: {x: 4.803172, y: 1.2870063, z: 0.52264243}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 165.084, y: 90, z: 90}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +716,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 1942476004}
   lineAssetName: Slon.txt
-  _uvPoints: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
