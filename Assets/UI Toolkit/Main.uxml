@@ -1,0 +1,31 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox style="width: 100%; height: 100%; flex-direction: row-reverse; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+        <ui:GroupBox name="OptionPanel" style="background-color: rgb(255, 210, 198); width: 20%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: auto;">
+            <ui:GroupBox style="height: auto; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: auto;">
+                <ui:DropdownField label="Фігура" index="-1" name="FigureDropdown" style="width: auto; flex-direction: column;" />
+                <ui:Slider picking-mode="Ignore" label="Позиція X: 0" value="0" high-value="2" low-value="-2" name="PositionX" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto;" />
+                <ui:Slider picking-mode="Ignore" label="Позиція Y: 0" value="0" high-value="2" low-value="-2" name="PositionY" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto; margin-top: 30px;" />
+                <ui:Slider picking-mode="Ignore" label="Позиція Z: 0" value="0" high-value="2" low-value="-2" name="PositionZ" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto; margin-top: 30px;" />
+                <ui:Slider picking-mode="Ignore" label="Поворот X: 0°" value="0" high-value="360" low-value="0" name="RotationX" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto; margin-top: 30px;" />
+                <ui:Slider picking-mode="Ignore" label="Поворот Y: 0°" value="0" high-value="360" low-value="0" name="RotationY" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto; margin-top: 30px;" />
+                <ui:Slider picking-mode="Ignore" label="Поворот Z: 0°" value="0" high-value="360" low-value="0" name="RotationZ" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto; margin-top: 30px;" />
+                <ui:Label tabindex="-1" text="Рисунок" parse-escape-sequences="true" display-tooltip-when-elided="true" style="justify-content: flex-start; align-items: flex-start; -unity-text-align: upper-center; margin-top: 30px;" />
+            </ui:GroupBox>
+            <ui:Slider picking-mode="Ignore" label="Позиція X: 0" value="0" high-value="1" low-value="-1" name="DrawingPositionX" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto;" />
+            <ui:Slider picking-mode="Ignore" label="Позиція Y: 0" value="0" high-value="1" low-value="-1" name="DrawingPositionY" style="flex-direction: column; font-size: 10px; flex-wrap: nowrap; height: auto; margin-top: 30px;" />
+        </ui:GroupBox>
+        <ui:GroupBox name="Viewport" style="flex-direction: row; width: 60%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        <ui:GroupBox name="InputTips" style="width: 20%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-direction: column-reverse;">
+            <ui:GroupBox name="List" style="flex-direction: column;">
+                <ui:GroupBox name="Tip" style="flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: initial; width: 50px; height: 79px; flex-shrink: initial; background-image: url(&apos;project://database/Assets/Textures/rotate.png?fileID=2800000&amp;guid=947de6efdfe600f49bd0577913fec82a&amp;type=3#rotate&apos;);" />
+                    <ui:Label tabindex="-1" text="Обертати" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: auto; flex-direction: column; justify-content: flex-start; align-self: center; margin-left: 20px; font-size: 24px;" />
+                </ui:GroupBox>
+                <ui:GroupBox name="Tip" style="flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: initial; width: 50px; height: 79px; flex-shrink: initial; background-image: url(&apos;project://database/Assets/Textures/clipart1264173.png?fileID=2800000&amp;guid=04000c0882f03c64fb5517522639391a&amp;type=3#clipart1264173&apos;);" />
+                    <ui:Label tabindex="-1" text="Зум" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: auto; flex-direction: column; justify-content: flex-start; align-self: center; margin-left: 20px; font-size: 24px;" />
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:GroupBox>
+</ui:UXML>
