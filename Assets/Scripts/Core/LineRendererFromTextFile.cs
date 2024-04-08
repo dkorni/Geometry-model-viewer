@@ -7,20 +7,20 @@ namespace GMV.Core
 {
     public class LineRendererFromTextFile : MonoBehaviour
     {
+        protected string _assetPath => Path.Combine(Application.streamingAssetsPath, lineAssetName);
+
+        protected Vector3[] _points; // original points
+
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private string lineAssetName;
 
-        private float _width;
-        private float _height;
-
-        private int _pointCount;
-
-        private Vector3[] _points; // original points
+        [SerializeField] private float _width;
+        [SerializeField] private float _height;
 
         private Vector3[] _pointsOnFigure;
 
         private Vector2[] _uvOriginalPoints;
-        private Vector2[] _uvPoints;
+        [SerializeField] private Vector2[] _uvPoints;
 
         private Vector2 _uvCenter;
 
@@ -33,7 +33,7 @@ namespace GMV.Core
 
         public void TransferOnFigure<T>(T figure, Vector3 figureTranslation, Vector3 figureRotation) where T : DrawSrtrategy
         {
-            _pointsOnFigure = new Vector3[_pointCount + 1];
+            _pointsOnFigure = new Vector3[_points.Length];
 
             switch (figure)
             {
@@ -41,9 +41,9 @@ namespace GMV.Core
 
                     var sphere = figure as Sphere;
 
-                    for (int i = 0; i <= _pointCount; i++)
+                    for (int i = 0; i < _points.Length; i++)
                     {
-                        var point = sphere.GetPoint(sphere.Radius, _uvPoints[i].x, _uvPoints[i].y);
+                        var point = sphere.GetPoint(sphere.Radius+0.01f, _uvPoints[i].x, _uvPoints[i].y);
                        
                         // переносимо точку малюнка з урахуванням повороту і зсуву фігури
                         var transformMatrix = Matrix4x4.Translate(figureTranslation) * Matrix4x4.Rotate(Quaternion.Euler(figureRotation.x, figureRotation.y, figureRotation.z));
@@ -84,23 +84,24 @@ namespace GMV.Core
         public void Build()
         {
             LoadDrawingPointsFromFile();
+            lineRenderer.positionCount = _points.Length;
+            lineRenderer.SetPositions(_points);
+
             NormilizeIntoUV();
-            CalculateUVCenter();
+            CalculateUVCenter(); 
         }
 
-        private void LoadDrawingPointsFromFile()
+        protected virtual void LoadDrawingPointsFromFile()
         {
             List<Vector3> points = new List<Vector3>();
 
-            var path = Path.Combine(Application.streamingAssetsPath, lineAssetName);
-
-            using (var reader = new StreamReader(path))
+            using (var reader = new StreamReader(_assetPath))
             {
                 var sizes = reader.ReadLine().Split(" ");
                 _width = float.Parse(sizes[0]);
                 _height = float.Parse(sizes[1]);
 
-                _pointCount = int.Parse(reader.ReadLine());
+                reader.ReadLine();
 
                 while (!reader.EndOfStream)
                 {
@@ -113,9 +114,6 @@ namespace GMV.Core
                 }
 
                 _points = points.ToArray();
-
-                lineRenderer.positionCount = _pointCount + 1;
-                lineRenderer.SetPositions(_points);
             }
         }
 
@@ -124,8 +122,8 @@ namespace GMV.Core
             var uvPoints = new List<Vector2>();
             foreach (var point in _points)
             {
-                var u = (point.x * Mathf.PI / 6) / _width;
-                var v = (point.z * Mathf.PI / 6) / _height;
+                var u = (point.x * Mathf.PI / 2) / _width;
+                var v = (point.z * Mathf.PI / 2) / _height;
 
                 uvPoints.Add(new Vector2(u, v));
             }

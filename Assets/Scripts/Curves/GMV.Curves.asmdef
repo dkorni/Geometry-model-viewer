@@ -1,0 +1,16 @@
+{
+    "name": "GMV.Curves",
+    "rootNamespace": "",
+    "references": [
+        "GUID:68e21feafa8e53c44a79422adcdda30b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

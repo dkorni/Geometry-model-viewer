@@ -10,10 +10,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{EB482B53-2BFC-C3B7-15FB-F96AA0DAD7BF}</ProjectGuid>
+    <ProjectGuid>{1CCB67FB-32AE-BA70-FB1C-3A01445CA325}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>GMV.UI</AssemblyName>
+    <AssemblyName>GMV.Curves</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -60,10 +60,14 @@
     <Analyzer Include="D:\Program Files\Unity\2022.3.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\UI\MainUiPanel.cs" />
+    <Compile Include="Assets\Scripts\Curves\MyPoint.cs" />
+    <Compile Include="Assets\Scripts\Curves\Curve.cs" />
+    <Compile Include="Assets\Scripts\Curves\JsonConverters\Vec2Converter.cs" />
+    <Compile Include="Assets\Scripts\Curves\Figure.cs" />
+    <Compile Include="Assets\Scripts\Curves\CurveFigureLineRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\UI\GMV.UI.asmdef" />
+    <None Include="Assets\Scripts\Curves\GMV.Curves.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

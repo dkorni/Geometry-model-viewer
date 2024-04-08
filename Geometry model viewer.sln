@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMV.UI", "GMV.UI.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMV.Core", "GMV.Core.csproj", "{3AA92849-4707-604F-814B-7396408CE082}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMV.Curves", "GMV.Curves.csproj", "{1CCB67FB-32AE-BA70-FB1C-3A01445CA325}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{3AA92849-4707-604F-814B-7396408CE082}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AA92849-4707-604F-814B-7396408CE082}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AA92849-4707-604F-814B-7396408CE082}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CCB67FB-32AE-BA70-FB1C-3A01445CA325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCB67FB-32AE-BA70-FB1C-3A01445CA325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCB67FB-32AE-BA70-FB1C-3A01445CA325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCB67FB-32AE-BA70-FB1C-3A01445CA325}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
